@@ -56,9 +56,9 @@ public class EntityTests(ITestOutputHelper output)
     {
         using var world = new World();
         var entity = world.Spawn().Id();
-        world.On(entity).Add<int>();
+        world.On(entity).Add<int>(123);
         world.On(entity).Remove<int>();
-        world.On(entity).Add<int>();
+        world.On(entity).Add<int>(345);
         Assert.True(world.HasComponent<int>(entity));
     }
 
