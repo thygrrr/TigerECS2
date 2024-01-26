@@ -8,10 +8,8 @@ public struct Element<T>
     public T Value;
 }
     
-public sealed class World
+public sealed class World : IDisposable
 {
-    static int worldCount;
-
     readonly Entity _world;
     readonly WorldInfo _worldInfo;
 
@@ -23,7 +21,7 @@ public sealed class World
     public World()
     {
         _world = _archetypes.Spawn();
-        _worldInfo = new WorldInfo(++worldCount);
+        _worldInfo = new WorldInfo();
         _archetypes.AddComponent(StorageType.Create<WorldInfo>(Identity.None), _world.Identity, _worldInfo);
     }
 
@@ -321,11 +319,16 @@ public sealed class World
     {
         return _archetypes.GetTypeEntity(type);
     }
+
+    public void Dispose()
+    {
+        
+    }
 }
 
 public sealed class WorldInfo
 {
-    public readonly int WorldId;
+    public readonly Guid WorldId = Guid.NewGuid();
     public int EntityCount;
     public int UnusedEntityCount;
     public int AllocatedEntityCount;
@@ -335,9 +338,4 @@ public sealed class WorldInfo
     // public int RelationCount;
     public int ElementCount;
     public int QueryCount;
-
-    public WorldInfo(int id)
-    {
-        WorldId = id;
-    }
 }

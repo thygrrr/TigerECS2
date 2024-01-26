@@ -33,7 +33,7 @@ public readonly struct Entity
     
     public override string ToString()
     {
-        return Identity.ToString();
+        return $"🧩{Identity}";
     }
 
     

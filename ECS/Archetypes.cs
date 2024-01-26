@@ -107,7 +107,7 @@ public sealed class Archetypes
 
 		if (oldTable.Types.Contains(type))
 		{
-			throw new Exception($"Entity {identity} already has component of type {type}");
+			throw new ArgumentException($"Entity {identity} already has component of type {type}");
 		}
 
 		if (_isLocked)
@@ -178,7 +178,7 @@ public sealed class Archetypes
 
 		if (!oldTable.Types.Contains(type))
 		{
-			throw new Exception($"cannot remove non-existent component {type.Type.Name} from entity {identity}");
+			throw new ArgumentException($"cannot remove non-existent component {type.Type.Name} from entity {identity}");
 		}
 
 		if (_isLocked)
